@@ -30,11 +30,12 @@ This role has no dependencies.
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: servers
+      vars:
+        remove_old_installation: yes
+        docker_compose_version: "1.24.1"
       roles:
-         - { role: bigpaulie.docker-setup }
+         - { role: bigpaulie.docker_setup }
 
 License
 -------
