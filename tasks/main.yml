@@ -1,0 +1,53 @@
+---
+- name: Remove old installations of docker
+  apt:
+    pkg: "{{ packages }}"
+    purge: yes
+    state: absent
+    autoremove: yes
+  vars:
+    packages: 
+      - "docker"
+      - "docker-engine"
+      - "docker.io"
+      - "containerd"
+      - "runc"
+  when: 
+    - remove_old_installation == "yes"
+
+- name: Ensure necessary dependencies are installed
+  apt:
+    pkg: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+      - "apt-transport-https"
+      - "ca-certificates"
+      - "curl"
+      - "gnupg-agent"
+      - "software-properties-common"
+
+- name: "Add Docker’s official GPG key"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+
+- name: Add docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable"
+    state: present
+  when: 
+    - ansible_architecture == "x86_64"
+
+- name: Install docker engine
+  apt:
+    pkg: "{{ packages }}"
+    update_cache: yes
+    state: latest
+  vars:
+    packages:
+      - "docker-ce"
+      - "docker-ce-cli"
+      - "containerd.io"
