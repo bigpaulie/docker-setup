@@ -6,13 +6,13 @@
     state: absent
     autoremove: yes
   vars:
-    packages: 
+    packages:
       - "docker"
       - "docker-engine"
       - "docker.io"
       - "containerd"
       - "runc"
-  when: 
+  when:
     - remove_old_installation == "yes"
 
 - name: Ensure necessary dependencies are installed
@@ -38,19 +38,23 @@
   apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
-  when: 
+  when:
     - ansible_architecture == "x86_64"
 
 - name: Install docker engine
   apt:
     pkg: "{{ packages }}"
     update_cache: yes
-    state: latest
+    state: present
   vars:
     packages:
-      - "docker-ce"
-      - "docker-ce-cli"
-      - "containerd.io"
+      - "aufs-tools=1:4.9+20170918-1ubuntu1"
+      - "cgroupfs-mount=1.4"
+      - "libltdl7=2.4.6-2"
+      - "pigz=2.4-1"
+      - "docker-ce=5:19.03.2~3-0~ubuntu-bionic"
+      - "docker-ce-cli=5:19.03.2~3-0~ubuntu-bionic"
+      - "containerd.io=1.2.6-3"
 
 - name: Install docker-compose
   get_url:
