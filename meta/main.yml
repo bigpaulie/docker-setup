@@ -29,8 +29,8 @@ galaxy_info:
   #
   platforms:
     - name: Ubuntu
-      versions:
-        - 18
+      releases:
+        - bionic
 
   galaxy_tags: [
     "setup", "docker", "compose", "ubuntu"
