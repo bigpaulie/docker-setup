@@ -1,2 +1,9 @@
 ---
-# handlers file for docker-setup
+- name: Docker compose installed
+  file:
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    mode: '0777'
+    owner: root
+    group: root
+    state: link

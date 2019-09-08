@@ -51,3 +51,13 @@
       - "docker-ce"
       - "docker-ce-cli"
       - "containerd.io"
+
+- name: Install docker-compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-{{ansible_system}}-{{ansible_architecture}}"
+    dest: /usr/local/bin/docker-compose
+    mode: '0777'
+    owner: root
+    group: root
+  notify:
+    - "Docker compose installed"

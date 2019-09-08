@@ -2,3 +2,6 @@
 # Should we first try to uninstall old docker installation ?
 # accepted values are yes/no
 remove_old_installation: yes
+
+# Docker compose version
+docker_compose_version: 1.24.1
