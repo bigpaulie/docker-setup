@@ -11,16 +11,10 @@ This role doesn't require any pre-requisites.
 Role Variables
 --------------
 
-vars/main.yml
-
-**remove_old_installation** 
-
-This variables if set to "yes" will attempt to remove any previously installed docker version.
-If you don't need this set the value to "no"
-
-**docker_compose_version**
-
-Set this variable to the exact version of docker compose you want.
+|variable name| description | default value|
+|-------------|-------------|--------------|
+|remove_old_installation|This variables if set to "yes" will attempt to remove any previously installed docker version. If you don't need this set the value to "no"|yes|
+|docker_compose_version|Set this variable to the exact version of docker compose you want.|1.24.1|
 
 Dependencies
 ------------
